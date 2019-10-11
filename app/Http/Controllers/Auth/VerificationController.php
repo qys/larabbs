@@ -34,8 +34,8 @@ class VerificationController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('signed')->only('verify');
-        $this->middleware('throttle:6,1')->only('verify', 'resend');
+        $this->middleware('auth');  //必须登录后才能访问控制的动作
+        $this->middleware('signed')->only('verify');    //只有verify动作使用signed中间件进行认证 URL签名认证
+        $this->middleware('throttle:6,1')->only('verify', 'resend');//对verify、resend动作做了频率限制 throttle 中间件是框架提供的访问频率限制功能。 限制1分钟<=6次
     }
 }
